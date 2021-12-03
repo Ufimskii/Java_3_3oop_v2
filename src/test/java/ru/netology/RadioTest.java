@@ -7,6 +7,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class RadioTest {
     Radio radio = new Radio();
 
+    //Number of station test
+    @Test
+    public void shouldNumberOfStation() {
+        Radio radio = new Radio(10);
+        radio.setNumberOfStations(8);
+        assertEquals(8, radio.getNumberOfStations());
+
+    }
+    @Test
+    public void shouldNumberOfStationDefault() {
+        Radio radio = new Radio();
+        assertEquals(10, radio.getNumberOfStations());
+
+    }
+
+
     //Stations Tests
     @Test //1
     public void shouldUpCurrentStation() {
@@ -66,9 +82,9 @@ class RadioTest {
 
     @Test//2
     public void shouldUpMaxValume() {
-        radio.setCurrentValume(10);
+        radio.setCurrentValume(100);
         radio.upVolume();
-        assertEquals(10, radio.getCurrentValume());
+        assertEquals(100, radio.getCurrentValume());
 
     }
 
