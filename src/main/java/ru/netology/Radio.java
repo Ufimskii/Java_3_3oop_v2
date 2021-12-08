@@ -3,11 +3,13 @@ package ru.netology;
 public class Radio {
     private int maxValume = 100;
     private int minValume = 0;
-    private int currentValume;
+    int currentValume;
     private int maxStation = 9;
     private int minStation = 0;
-    private int currentStation;
-    private int numberOfStations = 10;
+
+
+    int currentStation;
+    private int numberOfStations = 9;
 
     public Radio(int numberOfStations) {
         this.numberOfStations = numberOfStations;
@@ -15,6 +17,7 @@ public class Radio {
 
     public Radio() {
     }
+
     //Количество станций
     public int getNumberOfStations() {
         return numberOfStations;
@@ -24,6 +27,8 @@ public class Radio {
         this.numberOfStations = numberOfStations;
     }
     // СТАНЦИИ
+
+
     // Максимальная станция
     public int getMaxStation() {
         return maxStation;
@@ -48,32 +53,46 @@ public class Radio {
     }
 
     public void setCurrentStation(int currentStation) {
-        if (currentStation > maxStation) {
-            return;
-        }
-        if (currentStation < minStation) {
-            return;
-        }
         this.currentStation = currentStation;
     }
 
-    //Увеличение станции
-    public void upStation() {
-        if (currentStation >= maxStation) {
-            currentStation = minStation;
-        } else {
-            currentStation++;
+
+    public void buttonChangeRadioStation(String arg) {
+        if (arg.matches("[0-9]*")) {
+            int currentStation = Integer.parseInt(arg);
+            if (currentStation <= numberOfStations)
+                this.currentStation = currentStation;
+        } else if ("next".equals(arg)) {
+            if (currentStation == numberOfStations) {
+                currentStation = 0;
+            } else {
+                currentStation++;
+            }
+        } else if ("prev".equals(arg)) {
+            if (currentStation == 0) {
+                currentStation = maxStation;
+            } else {
+                currentStation--;
+            }
         }
     }
+    //Увеличение станции
+//    public void upStation() {
+//        if (currentStation >= maxStation) {
+//            currentStation = minStation;
+//        } else {
+//            currentStation++;
+//        }
+//    }
 
     //Уменьшение станции
-    public void downStation() {
-        if (currentStation <= minStation) {
-            currentStation = maxStation;
-        } else {
-            currentStation--;
-        }
-    }
+//    public void downStation() {
+//        if (currentStation <= minStation) {
+//            currentStation = maxStation;
+//        } else {
+//            currentStation--;
+//        }
+//    }
 
     // ГРОМКОСТЬ
 // Максимальная громкость
@@ -103,17 +122,32 @@ public class Radio {
         this.currentValume = currentValume;
     }
 
-    //Увеличение громкости
-     public void upVolume() {
-        if (currentValume == maxValume) {
-            currentValume = currentValume + 0;
-        }else {currentValume++;}
+    public void buttonChangeVolume(String arg) {
+        if ("+".equals(arg)) {
+            if (currentValume < maxValume) {
+                currentValume++;
+            }
+        } else if ("-".equals(arg)) {
+            if (currentValume > 0) {
+                currentValume--;
+            }
+        }
     }
-
-    //Уменьшение громкости -
-    public void downVolume() {
-        if (currentValume == minValume) {
-            currentValume = currentValume - 0;
-        }else {currentValume--;}
-    }
+//    //Увеличение громкости
+//    public void upVolume() {
+//        if (currentValume == maxValume) {
+//            currentValume = currentValume + 0;
+//        } else {
+//            currentValume++;
+//        }
+//    }
+//
+//    //Уменьшение громкости -
+//    public void downVolume() {
+//        if (currentValume == minValume) {
+//            currentValume = currentValume - 0;
+//        } else {
+//            currentValume--;
+//        }
+//    }
 }
