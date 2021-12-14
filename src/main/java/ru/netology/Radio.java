@@ -3,32 +3,41 @@ package ru.netology;
 public class Radio {
     private int maxValume = 100;
     private int minValume = 0;
-    int currentValume;
+    private int currentValume;
     private int maxStation = 9;
     private int minStation = 0;
-
-
-    int currentStation;
-    private int numberOfStations = 9;
-
-    public Radio(int numberOfStations) {
-        this.numberOfStations = numberOfStations;
-    }
+    private int currentStation;
 
     public Radio() {
     }
 
-    //Количество станций
-    public int getNumberOfStations() {
-        return numberOfStations;
+    public Radio(int maxValume, int minValume,
+                 int currentValume, int maxStation,
+                 int minStation, int currentStation) {
+        this.maxValume = maxValume;
+        this.minValume = minValume;
+        this.currentValume = currentValume;
+        this.maxStation = maxStation;
+        this.minStation = minStation;
+        this.currentStation = currentStation;
     }
 
-    public void setNumberOfStations(int numberOfStations) {
-        this.numberOfStations = numberOfStations;
+    public Radio(int maxStation) {
+        this.maxStation = maxStation;
     }
+
+    public Radio(int maxStation, int currentStation, int currentValume) {
+        this.maxStation = maxStation;
+        this.currentStation = currentStation;
+        this.currentValume = currentValume;
+    }
+
+    public Radio(int currentStation, int currentValume) {
+        this.currentStation = currentStation;
+        this.currentValume = currentValume;
+    }
+
     // СТАНЦИИ
-
-
     // Максимальная станция
     public int getMaxStation() {
         return maxStation;
@@ -53,46 +62,34 @@ public class Radio {
     }
 
     public void setCurrentStation(int currentStation) {
+        if (currentStation > maxStation) {
+            this.currentStation = maxStation;
+            return;
+        }
+        if (currentStation < minStation) {
+            this.currentStation = minStation;
+            return;
+        }
         this.currentStation = currentStation;
     }
 
-
-    public void buttonChangeRadioStation(String arg) {
-        if (arg.matches("[0-9]*")) {
-            int currentStation = Integer.parseInt(arg);
-            if (currentStation <= numberOfStations)
-                this.currentStation = currentStation;
-        } else if ("next".equals(arg)) {
-            if (currentStation == numberOfStations) {
-                currentStation = 0;
-            } else {
-                currentStation++;
-            }
-        } else if ("prev".equals(arg)) {
-            if (currentStation == 0) {
-                currentStation = maxStation;
-            } else {
-                currentStation--;
-            }
+    //Увеличение станции
+    public void upStation() {
+        if (currentStation >= maxStation) {
+            currentStation = minStation;
+        } else {
+            currentStation++;
         }
     }
-    //Увеличение станции
-//    public void upStation() {
-//        if (currentStation >= maxStation) {
-//            currentStation = minStation;
-//        } else {
-//            currentStation++;
-//        }
-//    }
 
     //Уменьшение станции
-//    public void downStation() {
-//        if (currentStation <= minStation) {
-//            currentStation = maxStation;
-//        } else {
-//            currentStation--;
-//        }
-//    }
+    public void downStation() {
+        if (currentStation <= minStation) {
+            currentStation = maxStation;
+        } else {
+            currentStation--;
+        }
+    }
 
     // ГРОМКОСТЬ
 // Максимальная громкость
@@ -119,35 +116,33 @@ public class Radio {
     }
 
     public void setCurrentValume(int currentValume) {
+        if (currentValume > maxValume) {
+            this.currentValume = maxValume;
+            return;
+        }
+        if (currentValume < minValume) {
+            this.currentValume = minValume;
+            return;
+        }
+
         this.currentValume = currentValume;
     }
 
-    public void buttonChangeVolume(String arg) {
-        if ("+".equals(arg)) {
-            if (currentValume < maxValume) {
-                currentValume++;
-            }
-        } else if ("-".equals(arg)) {
-            if (currentValume > 0) {
-                currentValume--;
-            }
+    //    //Увеличение громкости
+    public void upValume() {
+        if (currentValume == maxValume) {
+            currentValume = currentValume + 0;
+        } else {
+            currentValume++;
         }
     }
-//    //Увеличение громкости
-//    public void upVolume() {
-//        if (currentValume == maxValume) {
-//            currentValume = currentValume + 0;
-//        } else {
-//            currentValume++;
-//        }
-//    }
-//
-//    //Уменьшение громкости -
-//    public void downVolume() {
-//        if (currentValume == minValume) {
-//            currentValume = currentValume - 0;
-//        } else {
-//            currentValume--;
-//        }
-//    }
+
+    //    //Уменьшение громкости -
+    public void downValume() {
+        if (currentValume == minValume) {
+            currentValume = currentValume - 0;
+        } else {
+            currentValume--;
+        }
+    }
 }

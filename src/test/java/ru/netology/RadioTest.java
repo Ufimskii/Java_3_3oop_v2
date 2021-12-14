@@ -5,98 +5,194 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
-    //Изменение громкости
+
+    //Станции
     @Test
-    public void shouldChangeValumeNotValidButton() {
-        Radio radio = new Radio();
-        radio.setCurrentValume(10);
-        radio.buttonChangeVolume("!");
-        assertEquals(radio.getCurrentValume(), 10);
+    void shouldSetMaxOneArgStation() {
+        Radio radio = new Radio(10);
+
+        assertEquals(10, radio.getMaxStation());
+
     }
 
     @Test
-    public void shouldUpMaxVolume() {
+    void shouldSetMaxNoArgsStation() {
         Radio radio = new Radio();
-        radio.setCurrentValume(100);
-        radio.buttonChangeVolume("+");
-        assertEquals(radio.getCurrentValume(), 100);
+
+        assertEquals(9, radio.getMaxStation());
     }
 
     @Test
-    public void shouldDownMinVolume() {
+    void shouldSetMinNoArgsStation() {
         Radio radio = new Radio();
-        radio.setCurrentValume(0);
-        radio.buttonChangeVolume("-");
-        assertEquals(radio.getCurrentValume(), 0);
+
+        assertEquals(0, radio.getMinStation());
     }
 
     @Test
-    public void shouldUpMinVolume() {
-        Radio radio = new Radio();
-        radio.setCurrentValume(0);
-        radio.buttonChangeVolume("+");
-        assertEquals(radio.getCurrentValume(), 1);
+    void shouldSetMinArgsStation() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+
+        assertEquals(0, radio.getMinStation());
     }
 
     @Test
-    public void shouldDownCurrentVolume() {
-        Radio radio = new Radio();
-        radio.setCurrentValume(10);
-        radio.buttonChangeVolume("-");
-        assertEquals(radio.getCurrentValume(), 9);
-    }
-    //Изменение станций
-    @Test
-    public void shouldChangeRadioStationNotValidButton() {
-        Radio radio = new Radio();
-        radio.setCurrentStation(9);
-        radio.buttonChangeRadioStation("nex");
-        assertEquals(radio.getCurrentStation(), 9);
+    void shouldSetCurrentArgsStation() {
+        Radio radio = new Radio(5, 95);
+
+        assertEquals(5, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldUpMaxStation() {
-        Radio radio = new Radio();
-        radio.setCurrentStation(9);
-        radio.buttonChangeRadioStation("next");
-        assertEquals(radio.getCurrentStation(), 0);
+    void shouldSetCurrentStation() {
+        Radio radio = new Radio(9, 2, 36);
+
+        assertEquals(2, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldDowmMinStation() {
-        Radio radio = new Radio();
+    void shouldSetMaxStation() {
+        Radio radio = new Radio(9, 5, 25);
+        radio.setCurrentStation(20);
+        assertEquals(9, radio.getCurrentStation());
+    }
+
+    @Test
+    void shouldSetMinStation() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
         radio.setCurrentStation(0);
-        radio.buttonChangeRadioStation("prev");
-        assertEquals(radio.getCurrentStation(), 9);
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldUpCurrentStation() {
-        Radio radio = new Radio();
-        radio.setCurrentStation(0);
-        radio.buttonChangeRadioStation("next");
-        assertEquals(radio.getCurrentStation(), 1);
+    void shouldSetUnderMinStation() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentStation(-12);
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldDownMaxStation() {
-        Radio radio = new Radio();
-        radio.setCurrentStation(9);
-        radio.buttonChangeRadioStation("prev");
-        assertEquals(radio.getCurrentStation(), 8);
+    void shouldUpStation() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentStation(8);
+        radio.upStation();
+        assertEquals(9, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldChoiceRadioStation() {
-        Radio radio = new Radio();
-        radio.buttonChangeRadioStation("7");
-        assertEquals(radio.getCurrentStation(), 7);
+    void shouldUpMaxStation() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentStation(10);
+        radio.upStation();
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
-    public void shouldChoiceNotValidStation() {
-        Radio radio = new Radio();
-        radio.buttonChangeRadioStation("10");
-        assertEquals(radio.getCurrentStation(), 0);
+    void shouldDownStation() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentStation(1);
+        radio.downStation();
+        assertEquals(0, radio.getCurrentStation());
     }
+
+    @Test
+    void shouldDownMinStation() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentStation(-1);
+        radio.downStation();
+        assertEquals(9, radio.getCurrentStation());
+    }
+
+    //Громкость
+    @Test
+    void shouldSetMaxValume() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+
+        assertEquals(100, radio.getMaxValume());
+    }
+
+    @Test
+    void shouldGetMinValume() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+
+        assertEquals(0, radio.getMinValume());
+    }
+
+    @Test
+    void shouldSetCurrentValume() {
+        Radio radio = new Radio(9, 7, 25);
+
+        assertEquals(25, radio.getCurrentValume());
+    }
+
+    @Test
+    void shouldSetMoreMaxValume() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentValume(102);
+        assertEquals(100, radio.getCurrentValume());
+    }
+
+    @Test
+    void shouldSetMinValume() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentValume(0);
+        assertEquals(0, radio.getCurrentValume());
+    }
+
+    @Test
+    void shouldSetUnderMinValume() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentValume(-5);
+        assertEquals(0, radio.getCurrentValume());
+    }
+
+    @Test
+    void shouldUpValume() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentValume(99);
+        radio.upValume();
+        assertEquals(100, radio.getCurrentValume());
+    }
+
+    @Test
+    void shouldUpMaxValume() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentValume(105);
+        radio.upValume();
+        assertEquals(100, radio.getCurrentValume());
+    }
+
+    @Test
+    void shouldDownValume() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentValume(1);
+        radio.downValume();
+        assertEquals(0, radio.getCurrentValume());
+    }
+
+    @Test
+    void shouldDownMinValume() {
+        Radio radio = new Radio(100, 0, 50,
+                9, 0, 5);
+        radio.setCurrentValume(-5);
+        radio.downValume();
+        assertEquals(0, radio.getCurrentValume());
+    }
+
+
 }
