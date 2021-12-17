@@ -11,7 +11,7 @@ class RadioTest {
     void shouldSetMaxOneArgStation() {
         Radio radio = new Radio(10);
 
-        assertEquals(10, radio.getMaxStation());
+        assertEquals(9, radio.getMaxStation());
 
     }
 
