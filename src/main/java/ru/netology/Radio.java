@@ -3,10 +3,10 @@ package ru.netology;
 public class Radio {
     private int maxValume=100;
     private int minValume=0;
-    private int currentValume;
+    private int currentValume=50;
     private int maxStation=9;
     private int minStation=0;
-    private int currentStation;
+    private int currentStation=5;
     private int numberStation=10;
 
     public Radio() {
@@ -16,31 +16,31 @@ public class Radio {
         this.maxStation = numberStation - 1;
     }
 
-    public Radio(int maxValume, int minValume,
-                 int currentValume, int maxStation,
-                 int minStation, int currentStation) {
-        this.maxValume = maxValume;
-        this.minValume = minValume;
-        this.currentValume = currentValume;
-        this.maxStation = maxStation;
-        this.minStation = minStation;
-        this.currentStation = currentStation;
-    }
+//    public Radio(int maxValume, int minValume,
+//                 int currentValume, int maxStation,
+//                 int minStation, int currentStation) {
+//        this.maxValume = maxValume;
+//        this.minValume = minValume;
+//        this.currentValume = currentValume;
+//        this.maxStation = maxStation;
+//        this.minStation = minStation;
+//        this.currentStation = currentStation;
+//    }
 
 //    public Radio(int maxStation) {
 //        this.maxStation = maxStation;
 //    }
 
-    public Radio(int maxStation, int currentStation, int currentValume) {
-        this.maxStation = maxStation;
-        this.currentStation = currentStation;
-        this.currentValume = currentValume;
-    }
-
-    public Radio(int currentStation, int currentValume) {
-        this.currentStation = currentStation;
-        this.currentValume = currentValume;
-    }
+//    public Radio(int maxStation, int currentStation, int currentValume) {
+//        this.maxStation = maxStation;
+//        this.currentStation = currentStation;
+//        this.currentValume = currentValume;
+//    }
+//
+//    public Radio(int currentStation, int currentValume) {
+//        this.currentStation = currentStation;
+//        this.currentValume = currentValume;
+//    }
 
     // СТАНЦИИ
     // Максимальная станция
